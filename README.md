@@ -94,10 +94,10 @@ The tests under the [`test`][test-folder] folder can be seen as additional examp
 
 ## Benchmark (Updated at Jan 13, 2023)
 
+Gas consumption analysis was conducted in order to understand the associated costs to the usage of the `vrf-solidity` library. Only `public` functions were object of study as they are the only functions meant to be called by other parties.
+
 - Solc version: 0.6.12+commit.27d51765
 - Optimizer enabled: true (200)
-
-Gas consumption analysis was conducted in order to understand the associated costs to the usage of the `vrf-solidity` library. Only `public` functions were object of study as they are the only functions meant to be called by other parties.
 
 Gas consumption derived from [Etherscan](https://etherscan.io/gastracker) Average. USD price estimation derived from [CoinMarketCap](https://coinmarketcap.com/currencies/ethereum/).
 
@@ -125,6 +125,27 @@ The three auxiliary public functions (`decodeProof`, `decodePoint` and `computeF
 |  VRF           ·  decodePoint              ·      55844  ·      55877  ·      55867  ·          10  ·       1.10  │
 ·················|···························|·············|·············|·············|··············|··············
 |  VRF           ·  computeFastVerifyParams  ·    1513058  ·    1831274  ·    1611989  ·          91  ·      31.88  │
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
+```
+
+In Polygon, Gas consumption derived from [Polygonscan](https://polygonscan.com/gastracker) Average. USD price estimation derived from [CoinMarketCap](https://coinmarketcap.com/currencies/polygon/).
+
+- 51.6 gwei/gas
+- 0.91 usd/matic
+
+```
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
+|  Contract      ·  Method                   ·  Min        ·  Max        ·  Avg        ·  # calls     ·  usd (avg)  │
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
+|  VRF           ·  verify                   ·    1543493  ·    1862450  ·    1643712  ·          92  ·     0.0772  │
+·················|···························|·············|·············|·············|··············|··············
+|  VRF           ·  fastVerify               ·     106360  ·     352838  ·     150715  ·          94  ·     0.0071  │
+·················|···························|·············|·············|·············|··············|··············
+|  VRF           ·  decodeProof              ·      56839  ·      56860  ·      56851  ·          10  ·     0.0027  │
+·················|···························|·············|·············|·············|··············|··············
+|  VRF           ·  decodePoint              ·      55844  ·      55877  ·      55867  ·          10  ·     0.0026  │
+·················|···························|·············|·············|·············|··············|··············
+|  VRF           ·  computeFastVerifyParams  ·    1513058  ·    1831274  ·    1611989  ·          91  ·     0.0757  │
 ·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
 ```
 
