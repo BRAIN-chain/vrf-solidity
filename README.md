@@ -92,34 +92,40 @@ contract VRFTestHelper {
 
 The tests under the [`test`][test-folder] folder can be seen as additional examples for interacting with the contract using Solidity and Javascript.
 
-## Benchmark
+## Benchmark (Updated at Jan 13, 2023)
 
-Gas consumption analysis was conducted in order  to understand the associated costs to the usage of the `vrf-solidity` library. Only `public` functions were object of study as they are the only functions meant to be called by other parties.
+- Solc version: 0.6.12+commit.27d51765
+- Optimizer enabled: true (200)
+
+Gas consumption analysis was conducted in order to understand the associated costs to the usage of the `vrf-solidity` library. Only `public` functions were object of study as they are the only functions meant to be called by other parties.
+
+Gas consumption derived from [Etherscan](https://etherscan.io/gastracker) Average. USD price estimation derived from [CoinMarketCap](https://coinmarketcap.com/currencies/ethereum/).
+
+- 14 gwei/gas
+- 1412.49 usd/eth
+
+```
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
+|  Contract      ·  Method                   ·  Min        ·  Max        ·  Avg        ·  # calls     ·  usd (avg)  │
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
+|  VRF           ·  verify                   ·    1543493  ·    1862450  ·    1643712  ·          92  ·      32.50  │
+·················|···························|·············|·············|·············|··············|··············
+|  VRF           ·  fastVerify               ·     106360  ·     352838  ·     150715  ·          94  ·       2.98  │
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
+```
 
 The three auxiliary public functions (`decodeProof`, `decodePoint` and `computeFastVerifyParams`) are recommended to be used (if possible) as off-chain operations, so that there is not gas costs.
 
-Gas consumption and USD price estimation with a gas price of 100 Gwei, derived from [ETH Gas Station](https://ethgasstation.info/):
-
 ```
-·--------------------------------------------|---------------------------|-------------|----------------------------·
-|    Solc version: 0.6.12+commit.27d51765    ·  Optimizer enabled: true  ·  Runs: 200  ·  Block limit: 6718946 gas  │
-·············································|···························|·············|·····························
-|  Methods                                   ·              100 gwei/gas               ·       590.98 usd/eth       │
-·················|···························|·············|·············|·············|··············|··············
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
 |  Contract      ·  Method                   ·  Min        ·  Max        ·  Avg        ·  # calls     ·  usd (avg)  │
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
+|  VRF           ·  decodeProof              ·      56839  ·      56860  ·      56851  ·          10  ·       1.12  │
 ·················|···························|·············|·············|·············|··············|··············
-|  VRF           ·  computeFastVerifyParams  ·    1513058  ·    1831274  ·    1611989  ·          91  ·      95.27  │
+|  VRF           ·  decodePoint              ·      55844  ·      55877  ·      55867  ·          10  ·       1.10  │
 ·················|···························|·············|·············|·············|··············|··············
-|  VRF           ·  decodePoint              ·      55844  ·      55877  ·      55867  ·          10  ·       3.30  │
-·················|···························|·············|·············|·············|··············|··············
-|  VRF           ·  decodeProof              ·      56839  ·      56860  ·      56851  ·          10  ·       3.36  │
-·················|···························|·············|·············|·············|··············|··············
-|  VRF           ·  fastVerify               ·     106360  ·     352838  ·     150715  ·          94  ·       8.91  │
-·················|···························|·············|·············|·············|··············|··············
-|  VRF           ·  gammaToHash              ·      24189  ·      24201  ·      24198  ·          91  ·       1.43  │
-·················|···························|·············|·············|·············|··············|··············
-|  VRF           ·  verify                   ·    1543493  ·    1862450  ·    1643712  ·          92  ·      97.14  │
-·--------------------------------------------|-------------|-------------|-------------|--------------|-------------·
+|  VRF           ·  computeFastVerifyParams  ·    1513058  ·    1831274  ·    1611989  ·          91  ·      31.88  │
+·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
 ```
 
 ## Test Vectors
