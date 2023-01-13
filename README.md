@@ -96,10 +96,31 @@ The tests under the [`test`][test-folder] folder can be seen as additional examp
 
 Gas consumption analysis was conducted in order to understand the associated costs to the usage of the `vrf-solidity` library. Only `public` functions were object of study as they are the only functions meant to be called by other parties.
 
-- Solc version: 0.6.12+commit.27d51765
-- Optimizer enabled: true (200)
+The three auxiliary public functions (`decodeProof`, `decodePoint` and `computeFastVerifyParams`) are recommended to be used (if possible) as off-chain operations.
 
-Gas consumption derived from [Etherscan](https://etherscan.io/gastracker) Average. USD price estimation derived from [CoinMarketCap](https://coinmarketcap.com/currencies/ethereum/).
+### How to Run
+
+- solc version: 0.6.12+commit.27d51765.Emscripten.clang
+- optimizer enabled: true (runs 200)
+
+```bash
+$ nvm use 12
+
+$ ganache-cli -b 5
+```
+```bash
+$ nvm use 12
+
+$ truffle test --network local ./benchmark/VRFGasHelper.sol ./benchmark/gas.js
+
+  Contract: VRFGasHelper - Gas consumption analysis
+    VRF verification functions:
+      ✓ should verify a VRF proof (1) (1615119 gas)
+      ✓ should verify a VRF proof (2) (1706587 gas)
+      ...
+```
+
+In Ethereum, gas consumption derived from [Etherscan](https://etherscan.io/gastracker) Average. USD price estimation derived from [CoinMarketCap](https://coinmarketcap.com/currencies/ethereum/).
 
 - 14 gwei/gas
 - 1412.49 usd/eth
@@ -114,8 +135,6 @@ Gas consumption derived from [Etherscan](https://etherscan.io/gastracker) Averag
 ·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
 ```
 
-The three auxiliary public functions (`decodeProof`, `decodePoint` and `computeFastVerifyParams`) are recommended to be used (if possible) as off-chain operations, so that there is not gas costs.
-
 ```
 ·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
 |  Contract      ·  Method                   ·  Min        ·  Max        ·  Avg        ·  # calls     ·  usd (avg)  │
@@ -128,7 +147,7 @@ The three auxiliary public functions (`decodeProof`, `decodePoint` and `computeF
 ·----------------|---------------------------|-------------|-------------|-------------|--------------|-------------·
 ```
 
-In Polygon, Gas consumption derived from [Polygonscan](https://polygonscan.com/gastracker) Average. USD price estimation derived from [CoinMarketCap](https://coinmarketcap.com/currencies/polygon/).
+In Polygon, gas consumption derived from [Polygonscan](https://polygonscan.com/gastracker) Average. USD price estimation derived from [CoinMarketCap](https://coinmarketcap.com/currencies/polygon/).
 
 - 51.6 gwei/gas
 - 0.91 usd/matic
@@ -165,7 +184,7 @@ Some EC arithmetic operations have been opmitized thanks to the impressive work 
 
 ## License
 
-`vrf-rs` is published under the [MIT license][license].
+`vrf-solidity` is published under the [MIT license][license].
 
 [license]: https://github.com/witnet/vrf-rs/blob/master/LICENSE
 [test-folder]: https://github.com/witnet/vrf-solidity/blob/master/test
