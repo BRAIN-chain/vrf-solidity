@@ -1,3 +1,23 @@
+# TL;DR
+
+```bash
+$ npx hardhat test benchmark/gas.js --network hardhat
+
+Min: 1516826
+Max: 1831436
+Average (std): 1616299.717391304347826086 (62481.573940421077057338 = sqrt(3903947082.072306238185255197))
+Median: 1610665.5
+    ✔ verify() (41068ms)
+
+Min: 74484
+Max: 316627
+Average (std): 118130.957446808510638297 (54104.693868406037833132 = sqrt(2927317898.593933906745133544))
+Median: 110352
+    ✔ fastVerify() (1) && fastVerify() (41648ms)
+```
+
+---
+
 # vrf-solidity [![npm version](https://badge.fury.io/js/vrf-solidity.svg)](https://badge.fury.io/js/vrf-solidity) [![TravisCI](https://travis-ci.com/witnet/vrf-solidity.svg?branch=master)](https://travis-ci.com/witnet/vrf-solidity)
 
 `vrf-solidity` is an open source fast and effective implementation of Verifiable Random Functions (VRFs) written in Solidity. More precisely, this library implements verification functions for VRF proofs based on the Elliptic Curve (EC) `Secp256k1`.
