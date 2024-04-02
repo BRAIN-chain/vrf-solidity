@@ -38,7 +38,7 @@ module.exports = {
       forking: {
         enabled: true,
         url: 'https://rpc.ankr.com/eth',
-        blockNumber: 18887520
+        // blockNumber: 18887520
       },
     },
     localhost: {
